@@ -39,17 +39,19 @@ export default {
     }
   },
   apollo: {
-    torrents: gql`query {
-      torrents {
-        downloaded,
-        id,
-        name,
-        size,
-        downloaded,
-        startedAt
-      }
-    }`,
-    pollInterval: 300
+    torrents: {
+      query: gql`query {
+        torrents {
+          downloaded,
+          id,
+          name,
+          size,
+          downloaded,
+          startedAt
+        }
+      }`,
+      pollInterval: 200
+    }
   },
   methods: {
     formatBytes: format.bytes,
