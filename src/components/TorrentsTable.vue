@@ -5,8 +5,9 @@
     <th class="size">Size</th>
     <th class="percent">%</th>
     <th class="progress">Progress</th>
+    <th class="state">State</th>
     <th class="downloaded">Downloaded</th>
-    <th class="startedAt">Started at</th>
+    <th class="started">Started</th>
     <tr class="torrent" v-for="(torrent, index) in torrents" v-bind:key="torrent.id">
       <td class="name">{{torrent.name}}</td>
       <td class="size">{{formatBytes(torrent.size)}}</td>
@@ -16,10 +17,11 @@
       <td class="progress">
         <progress v-bind:value="torrent.downloaded / torrent.size"></progress>
       </td>
+      <td class="state">{{torrent.state.toLowerCase()}}</td>
       <td class="downloaded">{{formatBytes(torrent.downloaded)}}</td>
-      <td class="startedAt">
+      <td class="started">
 
-        <time v-if="torrent.startedAt" v-bind:datetime="torrent.startedAt">{{new Date(torrent.startedAt).toLocaleString()}}</time>
+        <time v-if="torrent.started" v-bind:datetime="torrent.started">{{new Date(torrent.started).toLocaleString()}}</time>
         <span v-else>never</span>
       </td>
     </tr>
@@ -47,7 +49,8 @@ export default {
           name,
           size,
           downloaded,
-          startedAt
+          state,
+          started
         }
       }`,
       pollInterval: 200
@@ -78,6 +81,9 @@ th {
 
 .progress progress {
   width: 100%;
+}
+td.state {
+  text-transform: capitalize;
 }
 th {
   background-color: lightgray;
