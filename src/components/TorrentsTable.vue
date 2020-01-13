@@ -7,6 +7,7 @@
     <th class="progress">Progress</th>
     <th class="state">State</th>
     <th class="downloaded">Downloaded</th>
+    <th class="peerCount">Peers</th>
     <th class="started">Started</th>
     <tr class="torrent" v-for="(torrent, index) in torrents" v-bind:key="torrent.id">
       <td class="name">{{torrent.name}}</td>
@@ -19,6 +20,7 @@
       </td>
       <td class="state">{{torrent.state.toLowerCase()}}</td>
       <td class="downloaded">{{formatBytes(torrent.downloaded)}}</td>
+      <td class="peerCount">{{torrent.connectedPeersCount}} ({{torrent.availablePeersCount}})</td>
       <td class="started">
 
         <time v-if="torrent.started" v-bind:datetime="torrent.started">{{new Date(torrent.started).toLocaleString()}}</time>
@@ -50,7 +52,9 @@ export default {
           size,
           downloaded,
           state,
-          started
+          started,
+          connectedPeersCount,
+          availablePeersCount
         }
       }`,
       pollInterval: 200
